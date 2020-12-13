@@ -11,10 +11,10 @@ OBJDUMP =	$(CROSS_COMPILE)objdump
 OBJCOPY =	$(CROSS_COMPILE)objcopy
 SIZE =		$(CROSS_COMPILE)size
 
-ARCH = RV32IM
+ARCH = rv32im
 
-CFLAGS = -g -m32  -Os  -msoft-float -march=$(ARCH)  -I. -I../common -ffunction-sections -fdata-sections  -Ipanels -I../arch 
-LDFLAGS = -m32  -g  -msoft-float  -march=$(ARCH) -nostartfiles -Wl,--gc-sections
+CFLAGS = -g -mabi=ilp32   -Os   -march=$(ARCH)  -I. -I../common -ffunction-sections -fdata-sections  -Ipanels -I../arch 
+LDFLAGS =   -g -mabi=ilp32  -march=$(ARCH) -nostartfiles -Wl,--gc-sections
 OBJS = 	../arch/risc-v/crtuser.o \
 	../common/libhpdmc-c.o \
 	../common/uart.o  \
@@ -54,7 +54,7 @@ clean:
 	rm -f $(OUTPUT).elf $(OUTPUT).bin $(OBJS)
 
 %.o:	%.S
-	${CC} -c -m32 -march=RV32IM $^ -o $@
+	${CC} -c -march=$(ARCH) $^ -o $@
 
 %.o:	%.c
 	${CC} -c $(CFLAGS) $^ -o $@
