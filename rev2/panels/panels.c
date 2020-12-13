@@ -25,10 +25,12 @@
 
 extern struct dsi_panel_config panel_iphone4;
 extern struct dsi_panel_config panel_e980;
+extern struct dsi_panel_config panel_psv1000;
 
 static struct dsi_panel_config *cfg[] = {
     &panel_e980,
     &panel_iphone4,
+    &panel_psv1000,
     NULL
 };
 
